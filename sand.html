@@ -38,11 +38,13 @@
 
         // Load the logo (replace with your own GLTF file)
         const loader = new THREE.GLTFLoader();
-        loader.load('"C:\Users\ellol\Documents\Gswapp\GswappLogo.glb")', function (gltf) {
+        loader.load('https://your-username.github.io/sand-effect/logo_model.glb', function (gltf) {
             logo = gltf.scene;
             logo.scale.set(2, 2, 2); // Adjust size
             logo.position.y = 0;
             scene.add(logo);
+        }, undefined, function (error) {
+            console.error('Error loading the GLTF model:', error); // Debugging: Check for errors in loading model
         });
 
         // Create sand particles
