@@ -16,8 +16,8 @@
 <script>
     let scene, camera, renderer, logo, particles, clock;
 
-    const sandParticleCount = 10000; // Number of sand particles
-    const sandSpeed = 0.05; // Speed of falling particles
+    const sandParticleCount = 10000;
+    const sandSpeed = 0.05;
     const sandParticles = [];
 
     function init() {
@@ -36,15 +36,16 @@
         pointLight.position.set(5, 5, 5);
         scene.add(pointLight);
 
-        // Load the logo (replace with your own GLTF file)
+        // Load the logo (replace with your GLTF file's path)
         const loader = new THREE.GLTFLoader();
-        loader.load(GswappLogo.glb, function (gltf) {
+        loader.load('GswappLogo.glb', function (gltf) {
             logo = gltf.scene;
-            logo.scale.set(2, 2, 2); // Adjust size
+            logo.scale.set(2, 2, 2);
             logo.position.y = 0;
             scene.add(logo);
+            console.log('Logo loaded successfully!'); // Debugging: Confirm model is loaded
         }, undefined, function (error) {
-            console.error('Error loading the GLTF model:', error); // Debugging: Check for errors in loading model
+            console.error('Error loading the GLTF model:', error);
         });
 
         // Create sand particles
@@ -58,7 +59,7 @@
             sandPositions[i * 3] = (Math.random() - 0.5) * 1.5; // X
             sandPositions[i * 3 + 1] = Math.random() * 2 + 1.5; // Y
             sandPositions[i * 3 + 2] = (Math.random() - 0.5) * 1.5; // Z
-            sandParticles.push({ y: sandPositions[i * 3 + 1] }); // Track initial Y
+            sandParticles.push({ y: sandPositions[i * 3 + 1] });
         }
         sandGeometry.setAttribute('position', new THREE.BufferAttribute(sandPositions, 3));
         particles = new THREE.Points(sandGeometry, sandMaterial);
@@ -95,7 +96,7 @@
             const index = i * 3 + 1; // Y position
             positions[index] -= sandSpeed * delta;
             if (positions[index] < 0) {
-                positions[index] = Math.random() * 2 + 1.5; // Reset to top
+                positions[index] = Math.random() * 2 + 1.5;
             }
         }
         particles.geometry.attributes.position.needsUpdate = true;
