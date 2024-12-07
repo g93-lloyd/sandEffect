@@ -36,7 +36,7 @@
 
         // Load the logo
         const loader = new THREE.GLTFLoader();
-        loader.load('GswappLogo.glb', function (gltf) {
+        loader.load('./GswappLogo.glb', function (gltf) {
             logo = gltf.scene;
             logo.scale.set(2, 2, 2);
             logo.position.y = 0;
